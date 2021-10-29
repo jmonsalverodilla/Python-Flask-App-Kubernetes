@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple_flask_app_k8s_deploy
+  labels:
+    type: restapi
+spec:
+  selector:
+    matchLabels:
+      app: simple_flask_app_k8s
+  replicas: 3
+  template:
+    metadata:
+      name: simple_flask_app_k8s_tmpl
+      labels:
+        app: simple_flask_app_k8s
+    spec:
+      containers:
+        - name: simple_flask_app_k8s
+          image: simple_flask_app_k8s:latest
+          ports:
+            - containerPort: 8000
